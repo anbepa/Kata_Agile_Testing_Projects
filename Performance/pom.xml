@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>performance-tests</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>OrangeHRM Performance Tests</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jmeter-maven-plugin.version>3.8.0</jmeter-maven-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- JMeter Maven plugin to execute performance tests -->
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>${jmeter-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jmeterTestFilesDirectory>src/test/jmeter</jmeterTestFilesDirectory>
+                    <resultsOutputIsCSV>true</resultsOutputIsCSV>
+                    <generateReports>true</generateReports>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
