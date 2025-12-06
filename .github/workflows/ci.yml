@@ -74,6 +74,7 @@ jobs:
         with:
           name: e2e-report
           path: E2E/target/site/serenity
+                  if-no-files-found: warn
 
   performance:
     name: Performance Tests
@@ -98,4 +99,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: performance-report
-          path: Performance/target/jmeter/reports
+          path: Performance/target/jmeter
+                  if-no-files-found: warn
