@@ -1,0 +1,13 @@
+# Configuración de Automation - Ejemplo
+# Copiar este archivo a automation.properties y reemplazar los valores
+
+# URL base de la aplicación
+base.url=__BASE_URL__
+
+# Credenciales de usuario
+username=__USER_ADMIN__
+password=__USER_PASS__
+
+# BrowserStack (opcional)
+browserstack.user=__BROWSERSTACK_USER__
+browserstack.key=__BROWSERSTACK_KEY__
