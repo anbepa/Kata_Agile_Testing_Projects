@@ -157,11 +157,50 @@ jobs:
           if-no-files-found: warn
 
   # ==================================================================
-  # FASE 5: Publicación Unificada de Reportes
+  # FASE 5: Performance Tests (JMeter)
+  # ==================================================================
+  Performance_Test:
+    name: Execute Performance Tests
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install JMeter
+        run: |
+          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          tar -xvzf apache-jmeter-5.6.3.tgz
+          rm apache-jmeter-5.6.3.tgz
+          mv apache-jmeter-5.6.3 jmeter
+
+      - name: Run JMeter Performance Test
+        run: |
+          ./jmeter/bin/jmeter -n -t Performance/login_load_test.jmx \
+            -l result.jtl -e -o performance-report \
+            -JUsrAuthorization=50 \
+            -JRampAuthorization=50 \
+            -JDurationAuthorization=300
+
+      - name: Upload Performance Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report
+          if-no-files-found: warn
+
+  # ==================================================================
+  # FASE 6: Publicación Unificada de Reportes
   # ==================================================================
   Deploy_Reports:
     name: Deploy Combined Reports
-    needs: [CD_Execute_E2E, CD_Execute_Apis]
+    needs: [CD_Execute_E2E, CD_Execute_Apis, Performance_Test]
     runs-on: ubuntu-latest
     if: always()
     permissions:
@@ -179,6 +218,12 @@ jobs:
         with:
           name: api-report
           path: public/karate-reports
+
+      - name: Download Performance Report
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-report
+          path: public/performance-report
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
