@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.example.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;

@@ -1,0 +1,101 @@
+name: CI/CD Pipeline - Agile Testing Kata (E2E UI Only)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  # ==================================================================
+  # FASE 1: CI (Build) - Compilación y Preparación del Código
+  # ==================================================================
+  CI_Build_E2E:
+    name: Build E2E Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Reemplazo de tokens en archivos de configuración
+      - name: Replace Tokens
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '__'
+          tokenSuffix: '__'
+          files: '["E2E/**/*.conf", "E2E/**/*.properties", "E2E/**/pom.xml"]'
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USER_ADMIN: ${{ secrets.USER_ADMIN }}
+          USER_PASS: ${{ secrets.USER_PASS }}
+          BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
+          BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
+
+      # Compilamos SIN ejecutar tests para validar integridad (CI)
+      - name: Maven Build (Skip Tests)
+        run: |
+          cd E2E
+          mvn clean package -DskipTests
+
+      # Guardamos el directorio E2E preparado (con tokens reemplazados y compilado)
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-build-artifact
+          path: E2E/
+          retention-days: 1
+
+  # ==================================================================
+  # FASE 2: CD (Test & Report) - Ejecución y Entrega de Resultados
+  # ==================================================================
+  CD_Execute_E2E:
+    name: Execute UI Tests & Report
+    needs: CI_Build_E2E # Dependencia estricta: No corre si el Build falla
+    runs-on: ubuntu-latest
+    if: always() # Intenta correr aunque el CI tenga advertencias, pero 'needs' manda
+    
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Descargamos el código ya preparado en la fase anterior
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-build-artifact
+          path: E2E
+
+      # Ejecución de Tests
+      - name: Run E2E Tests
+        env:
+          BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
+          BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
+        run: |
+          cd E2E
+          mvn verify || true
+
+      # Generación y Almacenamiento del Reporte como Artefacto
+      - name: Upload Serenity Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-report
+          path: E2E/target/site/serenity
+          if-no-files-found: warn
+
+      # Publicación del Reporte en GitHub Pages
+      - name: Deploy Serenity Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./E2E/target/site/serenity
+          keep_files: true

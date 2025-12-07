@@ -10,15 +10,16 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.example.ui.MainMenu;
-import com.example.ui.PimPage;
-import com.example.ui.AddEmployeePage;
+import com.example.userinterfaces.MainMenu;
+import com.example.userinterfaces.PimPage;
+import com.example.userinterfaces.AddEmployeePage;
+import com.example.userinterfaces.PersonalDetailsPage;
 
 /**
- * Adds a new employee via the PIM module.  The flow selects the PIM menu,
+ * Adds a new employee via the PIM module. The flow selects the PIM menu,
  * navigates to the Add Employee tab, enters the supplied first and last
- * names and uploads a profile photograph.  The photograph is loaded from
- * the classpath under src/test/resources/images.  After entering the
+ * names and uploads a profile photograph. The photograph is loaded from
+ * the classpath under src/test/resources/images. After entering the
  * information the task clicks the Save button.
  */
 @Subject("add a new employee")
@@ -39,7 +40,7 @@ public class AddEmployee implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        // Build the absolute path to the photo in the resources directory.  Using
+        // Build the absolute path to the photo in the resources directory. Using
         // Paths.get will work across operating systems.
         Path photo = Paths.get("src/test/resources/images", photoFileName);
         actor.attemptsTo(
@@ -49,7 +50,10 @@ public class AddEmployee implements Task {
                 Enter.theValue(lastName).into(AddEmployeePage.LAST_NAME_FIELD),
                 // Upload the file by sending the path to the hidden input
                 Upload.theFile(photo).to(AddEmployeePage.UPLOAD_INPUT),
-                Click.on(AddEmployeePage.SAVE_BUTTON)
-        );
+                Click.on(AddEmployeePage.SAVE_BUTTON),
+                net.serenitybdd.screenplay.waits.WaitUntil
+                        .the(PersonalDetailsPage.PERSONAL_DETAILS_HEADER,
+                                net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible())
+                        .forNoMoreThan(10).seconds());
     }
 }

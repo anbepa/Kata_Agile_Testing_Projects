@@ -1,0 +1,21 @@
+# Maven
+target/
+*.log
+
+# IDEA / Eclipse / VS Code
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Serenity
+serenity.properties
+
+# Local configuration with secrets
+src/test/resources/automation.properties
