@@ -76,14 +76,15 @@ jobs:
           name: e2e-build-artifact
           path: E2E
 
-      # Ejecución de Tests
+      # Ejecución de Tests y Generación del Reporte
       - name: Run E2E Tests
         env:
           BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
           BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
         run: |
           cd E2E
-          mvn verify || true
+          # Ejecutar tests y generar reporte HTML
+          mvn clean verify serenity:aggregate || true
 
       # Verificar que el reporte se generó correctamente
       - name: Verify Serenity Report
@@ -103,6 +104,179 @@ jobs:
             echo "ERROR: Directorio del reporte NO existe"
             echo "Estructura de target/site:"
             ls -la E2E/target/site/ || echo "target/site no existe"
+          fi
+
+      # Crear index.html simple si Serenity no lo generó
+      - name: Create Simple Report if Needed
+        run: |
+          if [ ! -f "E2E/target/site/serenity/index.html" ]; then
+            echo "Creando reporte HTML simple..."
+            mkdir -p E2E/target/site/serenity
+            
+            # Contar tests pasados y fallados desde los archivos JSON
+            TOTAL_TESTS=0
+            PASSED_TESTS=0
+            FAILED_TESTS=0
+            
+            if ls E2E/target/site/serenity/*.json 1> /dev/null 2>&1; then
+              for json_file in E2E/target/site/serenity/*.json; do
+                if grep -q '"result"' "$json_file"; then
+                  TOTAL_TESTS=$((TOTAL_TESTS + 1))
+                  if grep -q '"result":"SUCCESS"' "$json_file" || grep -q '"result":"PASSED"' "$json_file"; then
+                    PASSED_TESTS=$((PASSED_TESTS + 1))
+                  else
+                    FAILED_TESTS=$((FAILED_TESTS + 1))
+                  fi
+                fi
+              done
+            fi
+            
+            # Crear HTML simple
+            cat > E2E/target/site/serenity/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="es">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Reporte E2E Tests - OrangeHRM</title>
+              <style>
+                  * { margin: 0; padding: 0; box-sizing: border-box; }
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      min-height: 100vh;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      padding: 20px;
+                  }
+                  .container {
+                      background: white;
+                      border-radius: 16px;
+                      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                      padding: 40px;
+                      max-width: 600px;
+                      width: 100%;
+                  }
+                  h1 {
+                      color: #2d3748;
+                      font-size: 28px;
+                      margin-bottom: 10px;
+                      text-align: center;
+                  }
+                  .subtitle {
+                      color: #718096;
+                      text-align: center;
+                      margin-bottom: 30px;
+                      font-size: 14px;
+                  }
+                  .stats {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      gap: 15px;
+                      margin-bottom: 30px;
+                  }
+                  .stat-card {
+                      background: #f7fafc;
+                      border-radius: 12px;
+                      padding: 20px;
+                      text-align: center;
+                      border: 2px solid #e2e8f0;
+                  }
+                  .stat-card.passed { border-color: #48bb78; background: #f0fff4; }
+                  .stat-card.failed { border-color: #f56565; background: #fff5f5; }
+                  .stat-number {
+                      font-size: 36px;
+                      font-weight: bold;
+                      margin-bottom: 5px;
+                  }
+                  .stat-card.passed .stat-number { color: #48bb78; }
+                  .stat-card.failed .stat-number { color: #f56565; }
+                  .stat-card.total .stat-number { color: #4299e1; }
+                  .stat-label {
+                      color: #718096;
+                      font-size: 12px;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                  }
+                  .status-badge {
+                      display: inline-block;
+                      padding: 12px 24px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 16px;
+                      margin-top: 20px;
+                  }
+                  .status-badge.success {
+                      background: #48bb78;
+                      color: white;
+                  }
+                  .status-badge.failure {
+                      background: #f56565;
+                      color: white;
+                  }
+                  .footer {
+                      text-align: center;
+                      margin-top: 30px;
+                      color: #a0aec0;
+                      font-size: 12px;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>Reporte de Pruebas E2E</h1>
+                  <div class="subtitle">OrangeHRM - Automated Tests</div>
+                  
+                  <div class="stats">
+                      <div class="stat-card total">
+                          <div class="stat-number">TOTAL_TESTS_PLACEHOLDER</div>
+                          <div class="stat-label">Total Tests</div>
+                      </div>
+                      <div class="stat-card passed">
+                          <div class="stat-number">PASSED_TESTS_PLACEHOLDER</div>
+                          <div class="stat-label">Passed</div>
+                      </div>
+                      <div class="stat-card failed">
+                          <div class="stat-number">FAILED_TESTS_PLACEHOLDER</div>
+                          <div class="stat-label">Failed</div>
+                      </div>
+                  </div>
+                  
+                  <div style="text-align: center;">
+                      <div class="status-badge STATUS_CLASS_PLACEHOLDER">
+                          STATUS_TEXT_PLACEHOLDER
+                      </div>
+                  </div>
+                  
+                  <div class="footer">
+                      Generado automáticamente por GitHub Actions<br>
+                      $(date '+%Y-%m-%d %H:%M:%S UTC')
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+            
+            # Reemplazar placeholders
+            if [ $FAILED_TESTS -eq 0 ] && [ $TOTAL_TESTS -gt 0 ]; then
+              STATUS_CLASS="success"
+              STATUS_TEXT="Todos los tests pasaron"
+            elif [ $TOTAL_TESTS -eq 0 ]; then
+              STATUS_CLASS="failure"
+              STATUS_TEXT="No se encontraron tests"
+            else
+              STATUS_CLASS="failure"
+              STATUS_TEXT="Algunos tests fallaron"
+            fi
+            
+            sed -i "s/TOTAL_TESTS_PLACEHOLDER/$TOTAL_TESTS/g" E2E/target/site/serenity/index.html
+            sed -i "s/PASSED_TESTS_PLACEHOLDER/$PASSED_TESTS/g" E2E/target/site/serenity/index.html
+            sed -i "s/FAILED_TESTS_PLACEHOLDER/$FAILED_TESTS/g" E2E/target/site/serenity/index.html
+            sed -i "s/STATUS_CLASS_PLACEHOLDER/$STATUS_CLASS/g" E2E/target/site/serenity/index.html
+            sed -i "s/STATUS_TEXT_PLACEHOLDER/$STATUS_TEXT/g" E2E/target/site/serenity/index.html
+            
+            echo "Reporte HTML simple creado exitosamente"
           fi
 
       # Generación y Almacenamiento del Reporte como Artefacto
