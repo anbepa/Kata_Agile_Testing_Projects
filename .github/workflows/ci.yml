@@ -59,6 +59,8 @@ jobs:
     needs: CI_Build_E2E # Dependencia estricta: No corre si el Build falla
     runs-on: ubuntu-latest
     if: always() # Intenta correr aunque el CI tenga advertencias, pero 'needs' manda
+    permissions:
+      contents: write # Necesario para publicar en GitHub Pages
     
     steps:
       - name: Setup Java
