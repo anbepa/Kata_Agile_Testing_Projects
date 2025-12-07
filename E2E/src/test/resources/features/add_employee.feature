@@ -1,11 +1,6 @@
 Feature: Add and verify employee
 
-  # This scenario automates the process of logging into the OrangeHRM demo site,
-  # creating a new employee with basic details, uploading a profile photo and
-  # then searching for the newly created employee in the Directory module.  It
-  # follows the flow described in the Agile Testing kata: navigate to PIM,
-  # create an employee, upload a photo, move to Directory and validate the
-  # stored information.
+
 
   Scenario: Create and validate a new employee
     Given the admin user logs into OrangeHRM
