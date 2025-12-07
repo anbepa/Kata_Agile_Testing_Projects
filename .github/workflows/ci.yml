@@ -102,3 +102,76 @@ jobs:
           publish_dir: ./E2E/target/site/serenity
           keep_files: false
           force_orphan: true
+
+  # ==================================================================
+  # FASE 3: CI (Build) - Apis
+  # ==================================================================
+  CI_Build_Apis:
+    name: Build Apis Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Maven Build (Skip Tests)
+        run: |
+          cd Apis
+          mvn clean package -DskipTests
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: apis-build-artifact
+          path: Apis/
+          retention-days: 1
+
+  # ==================================================================
+  # FASE 4: CD (Test & Report) - Apis
+  # ==================================================================
+  CD_Execute_Apis:
+    name: Execute API Tests & Report
+    needs: CI_Build_Apis
+    runs-on: ubuntu-latest
+    if: always()
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: apis-build-artifact
+          path: Apis
+
+      - name: Run API Tests and Generate Report
+        run: |
+          cd Apis
+          mvn clean test || true
+
+      - name: Upload Karate Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-report
+          path: Apis/target/karate-reports
+          if-no-files-found: warn
+
+      - name: Deploy Karate Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./Apis/target/karate-reports
+          destination_dir: karate-reports
+          keep_files: true
+          force_orphan: false
