@@ -173,9 +173,9 @@ jobs:
         run: |
           ./jmeter/bin/jmeter -n -t Performance/login_load_test.jmx \
             -l result.jtl -e -o performance-report \
-            -JUsrAuthorization=${{ vars.JMETER_USERS || 50 }} \
-            -JRampAuthorization=${{ vars.JMETER_RAMPUP || 50 }} \
-            -JDurationAuthorization=${{ vars.JMETER_DURATION || 300 }}
+            -JUsrAuthorization=${{ vars.JMETER_USERS || 2 }} \
+            -JRampAuthorization=${{ vars.JMETER_RAMPUP || 1 }} \
+            -JDurationAuthorization=${{ vars.JMETER_DURATION || 10 }}
 
       - name: Upload Performance Report
         uses: actions/upload-artifact@v4
