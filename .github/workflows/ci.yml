@@ -93,16 +93,6 @@ jobs:
           path: E2E/target/site/serenity
           if-no-files-found: warn
 
-      # Publicación del Reporte en GitHub Pages
-      - name: Deploy Serenity Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./E2E/target/site/serenity
-          keep_files: false
-          force_orphan: true
-
   # ==================================================================
   # FASE 3: CI (Build) - Apis
   # ==================================================================
@@ -166,12 +156,34 @@ jobs:
           path: Apis/target/karate-reports
           if-no-files-found: warn
 
-      - name: Deploy Karate Report to GitHub Pages
-        if: always()
+  # ==================================================================
+  # FASE 5: Publicación Unificada de Reportes
+  # ==================================================================
+  Deploy_Reports:
+    name: Deploy Combined Reports
+    needs: [CD_Execute_E2E, CD_Execute_Apis]
+    runs-on: ubuntu-latest
+    if: always()
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Download E2E Report
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-report
+          path: public
+
+      - name: Download API Report
+        uses: actions/download-artifact@v4
+        with:
+          name: api-report
+          path: public/karate-reports
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Apis/target/karate-reports
-          destination_dir: karate-reports
-          keep_files: true
-          force_orphan: false
+          publish_dir: ./public
+          keep_files: false
+          force_orphan: true
