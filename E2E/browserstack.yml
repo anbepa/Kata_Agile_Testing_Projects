@@ -1,0 +1,19 @@
+userName: andresbernalpadi_6kGNor
+accessKey: 4mnqvbjqbMpRy31Jr7Td
+framework: serenity
+platforms:
+  - os: Windows
+    osVersion: 10
+    browserName: Chrome
+    browserVersion: 120.0
+  - os: OS X
+    osVersion: Monterey
+    browserName: Safari
+    browserVersion: 15.6
+  - deviceName: iPhone 13
+    osVersion: 15
+    browserName: Chromium
+    deviceOrientation: portrait
+browserstackLocal: true
+buildName: browserstack-build-1
+projectName: BrowserStack Sample
