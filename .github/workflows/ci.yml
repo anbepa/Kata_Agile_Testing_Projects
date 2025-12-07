@@ -221,3 +221,15 @@ jobs:
           publish_dir: ./public
           keep_files: false
           force_orphan: true
+
+      - name: Generate Report Summary
+        run: |
+          echo "### 📊 Test Reports Ready!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Report Type | Link |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🟢 **E2E (Serenity)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/index.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔵 **API (Karate)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/karate-reports/karate-summary.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🟠 **Performance (JMeter)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/performance-report/index.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> ⚠️ **Note:** It may take a minute for GitHub Pages to update after the workflow completes." >> $GITHUB_STEP_SUMMARY
