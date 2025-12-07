@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="res/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="res/karate-report.css" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script type="text/javascript" src="res/jquery.min.js"></script>
+    <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="res/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/karate-report.js"></script>
+    <script type="text/javascript" src="res/Resemble.js"></script>
+    <script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_M6fKk3dSX9HjglkqPSybauGas45NINb7EgsPGU8N9g1',{
+  api_host:'https://app.posthog.com',
+  persistence:'localStorage',
+  autocapture:false,
+  capture_pageview:false,
+  api_transport:'sendBeacon',
+  loaded: function(posthog) { 
+    posthog.capture("report_feature",{distinct_id:"98b06bbc-afe6-4ae7-971c-98b072cc0f62",karate_version:"1.4.1",karate_meta:null});
+  }
+});
+</script>
+
+    <title>karate.features.login</title>
+  </head>
+  <body>
+    <div id="root-container">
+      <div id="leftnav">
+        
+        <div>
+  <div class="nav-logo">
+    <a href="https://karatelabs.io">
+      <img src="karate-labs-logo-ring.svg" alt="Karate Labs"/>
+    </a>
+    <div class="nav-count">
+      <div id="nav-pass" class="bg-success">2</div>
+      <div id="nav-fail" class="bg-danger">0</div>
+    </div>
+  </div>
+  <div id="nav-env">
+    <div></div>
+  </div>
+  <div id="nav-type">
+    <div>Scenarios</div>
+  </div>
+  <div id="nav-date">
+    <div>2025-12-07 01:53:56 PM</div>
+  </div>
+</div>
+
+        <div class="nav-container">
+          <div class="nav-item passed">
+            <a href="#[1:13]"><span>[1:13]</span> <span>Inicio de sesión exitoso</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[2:27]"><span>[2:27]</span> <span>Inicio de sesión fallido con credenciales incorrectas</span></a>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="page-heading alert alert-primary">
+          <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
+          <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
+          <span class="feature-label">Feature:</span>
+          <span class="feature-path">karate/features/login.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">Validación de Inicio de Sesión (Login)</span>
+          <span class="feature-description"></span>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[1:13]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[1:13]</span>
+                <span class="scenario-name">Inicio de sesión exitoso</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>1758</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[1:13]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.4">
+      <div class="step-ref bg-step">4</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def baseUrl = karate.get(&#39;baseUrl&#39;)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">6</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 1. Obtener página de login y extraer token de seguridad (CSRF)</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url baseUrl + &#39;/web/index.php/auth/login&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">8</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">902</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.7">13:53:53.466 request:
+1 &gt; GET https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+1 &gt; Host: opensource-demo.orangehrmlive.com
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/21.0.5)
+1 &gt; Accept-Encoding: gzip,deflate
+
+
+13:53:54.212 response time in milliseconds: 640
+1 &lt; 200
+1 &lt; Server: nginx
+1 &lt; Date: Sun, 07 Dec 2025 18:53:54 GMT
+1 &lt; Content-Type: text/html; charset=UTF-8
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Connection: keep-alive
+1 &lt; Set-Cookie: orangehrm=p2larosgk02a71gkfvofl00ji3; path=/web; secure; HttpOnly; SameSite=Lax
+1 &lt; Cache-Control: no-cache, private
+1 &lt; Vary: Accept-Encoding
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Strict-Transport-Security: max-age=31536000; includeSubdomains;
+1 &lt; Content-Security-Policy: default-src &#39;self&#39; *.projects-abroad.net fonts.googleapis.com fonts.gstatic.com code.jquery.com maxcdn.bootstrapcdn.com ajax.googleapis.com cdnjs.cloudflare.com native.testing.equest.com www.google.com *.docusign.net www.youtube.com youtu.be player.vimeo.com docs.google.com &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; data: font;frame-src &#39;self&#39; www.youtube.com www.vimeo.com vimeo.com www.yahoo.com www.dailymotion.com www.metacafe.com www.ustream.tv native.testing.equest.com sandbox.e-signlive.com *.orangehrmlive.com *.orangehrm.com *.amazonaws.com;connect-src &#39;self&#39; *.orangehrm.com *.orangehrmlive.com;worker-src blob: &#39;self&#39;;img-src * &#39;self&#39; data: blob:
+1 &lt; client_max_body_size: 50M
+1 &lt; Public-Key-Pins: pin-sha256=&quot;Md7QJIL/UMqdHaS73pEkLHm5ofUUE35+r4SYdM014/E=&quot;;pin-sha256=&quot;blgmjf3Tb3C0sUqb7jo4axiZAnr327fX0ycrUGqjw2k=&quot;;pin-sha256=&quot;puCdyuZdXoDc5jSdcGKU6mdjd0VNq16yoaO2BcDF36A=&quot;;pin-sha256=&quot;yQhO6YqQX5Y/NxyHAjXnI3jOtYWUm/TtRr666RunXRg=&quot;; pin-sha256=&quot;Slt48iBVTjuRQJTjbzopminRrHSGtndY0/sj0lFf9Qk=&quot;; max-age=63072000; includeSubDomains
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+  &lt;title&gt;OrangeHRM&lt;/title&gt;
+      &lt;link rel=&quot;icon&quot; href=&quot;/web/dist/favicon.ico?v=1721393199309&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/app.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+      &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;style&gt;
+    :root {
+            --oxd-primary-one-color:#FF7B1D;
+            --oxd-primary-font-color:#FFFFFF;
+            --oxd-secondary-four-color:#76BC21;
+            --oxd-secondary-font-color:#FFFFFF;
+            --oxd-primary-gradient-start-color:#FF920B;
+            --oxd-primary-gradient-end-color:#F35C17;
+            --oxd-secondary-gradient-start-color:#FF920B;
+            --oxd-secondary-gradient-end-color:#F35C17;
+            --oxd-primary-one-lighten-5-color:#ff8a37;
+            --oxd-primary-one-lighten-30-color:#ffd4b6;
+            --oxd-primary-one-darken-5-color:#ff6c03;
+            --oxd-primary-one-alpha-10-color:rgba(255, 123, 29, 0.1);
+            --oxd-primary-one-alpha-15-color:rgba(255, 123, 29, 0.15);
+            --oxd-primary-one-alpha-20-color:rgba(255, 123, 29, 0.2);
+            --oxd-primary-one-alpha-50-color:rgba(255, 123, 29, 0.5);
+            --oxd-secondary-four-lighten-5-color:#84d225;
+            --oxd-secondary-four-darken-5-color:#68a61d;
+            --oxd-secondary-four-alpha-10-color:rgba(118, 188, 33, 0.1);
+            --oxd-secondary-four-alpha-15-color:rgba(118, 188, 33, 0.15);
+            --oxd-secondary-four-alpha-20-color:rgba(118, 188, 33, 0.2);
+            --oxd-secondary-four-alpha-50-color:rgba(118, 188, 33, 0.5);
+        }
+  &lt;/style&gt;
+    &lt;noscript&gt;
+        &lt;strong&gt;
+            We&#39;re sorry but orangehrm doesn&#39;t work properly without JavaScript enabled. Please enable it to continue.
+        &lt;/strong&gt;
+    &lt;/noscript&gt;
+
+    &lt;div id=&quot;app&quot;&gt;
+    &lt;auth-login
+            :token=&quot;&amp;quot;7079559dac5d0b39e89e5a6860.ObpM9TOAqn7wwVZvUWYCt7pmVx8lABtEObLImfO3Fig.XIIVxUT00w64qhErYTIv8P0CZE8SNVYVTP-y7pvYO0VU4iu5XuXnU56GFw&amp;quot;&quot;
+            :login-logo-src=&quot;&amp;quot;\/web\/images\/ohrm_logo.png&amp;quot;&quot;
+            :login-banner-src=&quot;&amp;quot;\/web\/images\/ohrm_branding.png?v=1721393199309&amp;quot;&quot;
+            :show-social-media=&quot;true&quot;
+            :is-demo-mode=&quot;true&quot;
+            :authenticators=&quot;[]&quot;
+        &gt;
+    &lt;template v-slot:footer&gt;
+        &lt;div class=&quot;orangehrm-copyright-wrapper&quot;&gt;
+            &lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;OrangeHRM OS 5.7&lt;/oxd-text&gt;
+&lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;&amp;copy; 2005 - 2025 &lt;a href=&quot;http://www.orangehrm.com&quot; target=&quot;_blank&quot;&gt;OrangeHRM, Inc&lt;/a&gt;. All rights reserved.&lt;/oxd-text&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;/auth-login&gt;
+    &lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        window.appGlobal = {
+          baseUrl: &quot;/web/index.php&quot;,
+          publicPath: &quot;/web&quot;,
+        };
+    &lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/app.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.9">
+      <div class="step-ref bg-step">9</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>string responseText = response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.10">
+      <div class="step-ref bg-step">10</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def tokenMatch = responseText.match(/:token=&quot;&amp;quot;(.*?)&amp;quot;&quot;/)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">62</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:13]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.11">
+      <div class="step-ref bg-step">11</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def token = tokenMatch ? tokenMatch[1] : null</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 2. Enviar credenciales correctas</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># Desactivamos redirecciones para validar que el servidor nos envía al Dashboard</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.16">
+      <div class="step-ref passed">16</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure followRedirects = false</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.17">
+      <div class="step-ref passed">17</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url baseUrl + &#39;/web/index.php/auth/validate&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.18">
+      <div class="step-ref passed">18</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field username = &#39;Admin&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">47</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.19">
+      <div class="step-ref passed">19</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field password = &#39;admin123&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.20">
+      <div class="step-ref passed">20</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field _token = token</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.21">
+      <div class="step-ref passed">21</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">711</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.21">13:53:54.348 request:
+2 &gt; POST https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate
+2 &gt; Content-Type: application/x-www-form-urlencoded
+2 &gt; Cookie: orangehrm=p2larosgk02a71gkfvofl00ji3
+2 &gt; Content-Length: 169
+2 &gt; Host: opensource-demo.orangehrmlive.com
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/21.0.5)
+2 &gt; Accept-Encoding: gzip,deflate
+username=Admin&amp;password=admin123&amp;_token=7079559dac5d0b39e89e5a6860.ObpM9TOAqn7wwVZvUWYCt7pmVx8lABtEObLImfO3Fig.XIIVxUT00w64qhErYTIv8P0CZE8SNVYVTP-y7pvYO0VU4iu5XuXnU56GFw
+
+13:53:55.051 response time in milliseconds: 703
+2 &lt; 302
+2 &lt; Server: nginx
+2 &lt; Date: Sun, 07 Dec 2025 18:53:55 GMT
+2 &lt; Content-Type: text/html; charset=UTF-8
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Connection: keep-alive
+2 &lt; Set-Cookie: orangehrm=gusv66d8f4ioup30infpmtk04h; path=/web; secure; HttpOnly; SameSite=Lax
+2 &lt; Cache-Control: no-cache, private
+2 &lt; Location: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Strict-Transport-Security: max-age=31536000; includeSubdomains;
+2 &lt; Content-Security-Policy: default-src &#39;self&#39; *.projects-abroad.net fonts.googleapis.com fonts.gstatic.com code.jquery.com maxcdn.bootstrapcdn.com ajax.googleapis.com cdnjs.cloudflare.com native.testing.equest.com www.google.com *.docusign.net www.youtube.com youtu.be player.vimeo.com docs.google.com &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; data: font;frame-src &#39;self&#39; www.youtube.com www.vimeo.com vimeo.com www.yahoo.com www.dailymotion.com www.metacafe.com www.ustream.tv native.testing.equest.com sandbox.e-signlive.com *.orangehrmlive.com *.orangehrm.com *.amazonaws.com;connect-src &#39;self&#39; *.orangehrm.com *.orangehrmlive.com;worker-src blob: &#39;self&#39;;img-src * &#39;self&#39; data: blob:
+2 &lt; client_max_body_size: 50M
+2 &lt; Public-Key-Pins: pin-sha256=&quot;Md7QJIL/UMqdHaS73pEkLHm5ofUUE35+r4SYdM014/E=&quot;;pin-sha256=&quot;blgmjf3Tb3C0sUqb7jo4axiZAnr327fX0ycrUGqjw2k=&quot;;pin-sha256=&quot;puCdyuZdXoDc5jSdcGKU6mdjd0VNq16yoaO2BcDF36A=&quot;;pin-sha256=&quot;yQhO6YqQX5Y/NxyHAjXnI3jOtYWUm/TtRr666RunXRg=&quot;; pin-sha256=&quot;Slt48iBVTjuRQJTjbzopminRrHSGtndY0/sj0lFf9Qk=&quot;; max-age=63072000; includeSubDomains
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=&#39;https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index&#39;&quot; /&gt;
+
+        &lt;title&gt;Redirecting to https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Redirecting to &lt;a href=&quot;https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index&quot;&gt;https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index&lt;/a&gt;.
+    &lt;/body&gt;
+&lt;/html&gt;
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 3. Validar redirección exitosa (Código 302)</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.24">
+      <div class="step-ref passed">24</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 302</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.25">
+      <div class="step-ref passed">25</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match responseHeaders[&#39;Location&#39;][0] contains &#39;index.php/dashboard&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">15</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[2:27]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[2:27]</span>
+                <span class="scenario-name">Inicio de sesión fallido con credenciales incorrectas</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>1369</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[2:27]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.4">
+      <div class="step-ref bg-step">4</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def baseUrl = karate.get(&#39;baseUrl&#39;)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 1. Obtener página de login y extraer token de seguridad (CSRF)</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url baseUrl + &#39;/web/index.php/auth/login&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">467</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.7">13:53:55.077 request:
+1 &gt; GET https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+1 &gt; Host: opensource-demo.orangehrmlive.com
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/21.0.5)
+1 &gt; Accept-Encoding: gzip,deflate
+
+
+13:53:55.543 response time in milliseconds: 376
+1 &lt; 200
+1 &lt; Server: nginx
+1 &lt; Date: Sun, 07 Dec 2025 18:53:55 GMT
+1 &lt; Content-Type: text/html; charset=UTF-8
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Connection: keep-alive
+1 &lt; Set-Cookie: orangehrm=9meid05kl3s4nph6fqe2r7i9pi; path=/web; secure; HttpOnly; SameSite=Lax
+1 &lt; Cache-Control: no-cache, private
+1 &lt; Vary: Accept-Encoding
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Strict-Transport-Security: max-age=31536000; includeSubdomains;
+1 &lt; Content-Security-Policy: default-src &#39;self&#39; *.projects-abroad.net fonts.googleapis.com fonts.gstatic.com code.jquery.com maxcdn.bootstrapcdn.com ajax.googleapis.com cdnjs.cloudflare.com native.testing.equest.com www.google.com *.docusign.net www.youtube.com youtu.be player.vimeo.com docs.google.com &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; data: font;frame-src &#39;self&#39; www.youtube.com www.vimeo.com vimeo.com www.yahoo.com www.dailymotion.com www.metacafe.com www.ustream.tv native.testing.equest.com sandbox.e-signlive.com *.orangehrmlive.com *.orangehrm.com *.amazonaws.com;connect-src &#39;self&#39; *.orangehrm.com *.orangehrmlive.com;worker-src blob: &#39;self&#39;;img-src * &#39;self&#39; data: blob:
+1 &lt; client_max_body_size: 50M
+1 &lt; Public-Key-Pins: pin-sha256=&quot;Md7QJIL/UMqdHaS73pEkLHm5ofUUE35+r4SYdM014/E=&quot;;pin-sha256=&quot;blgmjf3Tb3C0sUqb7jo4axiZAnr327fX0ycrUGqjw2k=&quot;;pin-sha256=&quot;puCdyuZdXoDc5jSdcGKU6mdjd0VNq16yoaO2BcDF36A=&quot;;pin-sha256=&quot;yQhO6YqQX5Y/NxyHAjXnI3jOtYWUm/TtRr666RunXRg=&quot;; pin-sha256=&quot;Slt48iBVTjuRQJTjbzopminRrHSGtndY0/sj0lFf9Qk=&quot;; max-age=63072000; includeSubDomains
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+  &lt;title&gt;OrangeHRM&lt;/title&gt;
+      &lt;link rel=&quot;icon&quot; href=&quot;/web/dist/favicon.ico?v=1721393199309&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/app.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+      &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;style&gt;
+    :root {
+            --oxd-primary-one-color:#FF7B1D;
+            --oxd-primary-font-color:#FFFFFF;
+            --oxd-secondary-four-color:#76BC21;
+            --oxd-secondary-font-color:#FFFFFF;
+            --oxd-primary-gradient-start-color:#FF920B;
+            --oxd-primary-gradient-end-color:#F35C17;
+            --oxd-secondary-gradient-start-color:#FF920B;
+            --oxd-secondary-gradient-end-color:#F35C17;
+            --oxd-primary-one-lighten-5-color:#ff8a37;
+            --oxd-primary-one-lighten-30-color:#ffd4b6;
+            --oxd-primary-one-darken-5-color:#ff6c03;
+            --oxd-primary-one-alpha-10-color:rgba(255, 123, 29, 0.1);
+            --oxd-primary-one-alpha-15-color:rgba(255, 123, 29, 0.15);
+            --oxd-primary-one-alpha-20-color:rgba(255, 123, 29, 0.2);
+            --oxd-primary-one-alpha-50-color:rgba(255, 123, 29, 0.5);
+            --oxd-secondary-four-lighten-5-color:#84d225;
+            --oxd-secondary-four-darken-5-color:#68a61d;
+            --oxd-secondary-four-alpha-10-color:rgba(118, 188, 33, 0.1);
+            --oxd-secondary-four-alpha-15-color:rgba(118, 188, 33, 0.15);
+            --oxd-secondary-four-alpha-20-color:rgba(118, 188, 33, 0.2);
+            --oxd-secondary-four-alpha-50-color:rgba(118, 188, 33, 0.5);
+        }
+  &lt;/style&gt;
+    &lt;noscript&gt;
+        &lt;strong&gt;
+            We&#39;re sorry but orangehrm doesn&#39;t work properly without JavaScript enabled. Please enable it to continue.
+        &lt;/strong&gt;
+    &lt;/noscript&gt;
+
+    &lt;div id=&quot;app&quot;&gt;
+    &lt;auth-login
+            :token=&quot;&amp;quot;2904fb7bdddb94e23b2133126.OGssovko7plS7YFzUBnvyKPnJ79CMBpAY-1ABr0aPZ0.Tzh28rR3mdMZgLFCIFHbjsSORfEnCG4QIKU3UfpRDe93WWuQt2zc1T3c6g&amp;quot;&quot;
+            :login-logo-src=&quot;&amp;quot;\/web\/images\/ohrm_logo.png&amp;quot;&quot;
+            :login-banner-src=&quot;&amp;quot;\/web\/images\/ohrm_branding.png?v=1721393199309&amp;quot;&quot;
+            :show-social-media=&quot;true&quot;
+            :is-demo-mode=&quot;true&quot;
+            :authenticators=&quot;[]&quot;
+        &gt;
+    &lt;template v-slot:footer&gt;
+        &lt;div class=&quot;orangehrm-copyright-wrapper&quot;&gt;
+            &lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;OrangeHRM OS 5.7&lt;/oxd-text&gt;
+&lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;&amp;copy; 2005 - 2025 &lt;a href=&quot;http://www.orangehrm.com&quot; target=&quot;_blank&quot;&gt;OrangeHRM, Inc&lt;/a&gt;. All rights reserved.&lt;/oxd-text&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;/auth-login&gt;
+    &lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        window.appGlobal = {
+          baseUrl: &quot;/web/index.php&quot;,
+          publicPath: &quot;/web&quot;,
+        };
+    &lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/app.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.9">
+      <div class="step-ref bg-step">9</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>string responseText = response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.10">
+      <div class="step-ref bg-step">10</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def tokenMatch = responseText.match(/:token=&quot;&amp;quot;(.*?)&amp;quot;&quot;/)</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:27]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.11">
+      <div class="step-ref bg-step">11</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def token = tokenMatch ? tokenMatch[1] : null</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 2. Enviar credenciales incorrectas</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.29">
+      <div class="step-ref passed">29</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure followRedirects = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.30">
+      <div class="step-ref passed">30</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url baseUrl + &#39;/web/index.php/auth/validate&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.31">
+      <div class="step-ref passed">31</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field username = &#39;Admin&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.32">
+      <div class="step-ref passed">32</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field password = &#39;ClaveFalsa123&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.33">
+      <div class="step-ref passed">33</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>form field _token = token</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.34">
+      <div class="step-ref passed">34</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">896</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.34">13:53:55.548 request:
+2 &gt; POST https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate
+2 &gt; Content-Type: application/x-www-form-urlencoded
+2 &gt; Cookie: orangehrm=9meid05kl3s4nph6fqe2r7i9pi
+2 &gt; Content-Length: 173
+2 &gt; Host: opensource-demo.orangehrmlive.com
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/21.0.5)
+2 &gt; Accept-Encoding: gzip,deflate
+username=Admin&amp;password=ClaveFalsa123&amp;_token=2904fb7bdddb94e23b2133126.OGssovko7plS7YFzUBnvyKPnJ79CMBpAY-1ABr0aPZ0.Tzh28rR3mdMZgLFCIFHbjsSORfEnCG4QIKU3UfpRDe93WWuQt2zc1T3c6g
+
+13:53:56.182 request:
+3 &gt; POST https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate
+3 &gt; Content-Type: application/x-www-form-urlencoded
+3 &gt; Cookie: orangehrm=9meid05kl3s4nph6fqe2r7i9pi
+3 &gt; Host: opensource-demo.orangehrmlive.com
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.14 (Java/21.0.5)
+3 &gt; Accept-Encoding: gzip,deflate
+username=Admin&amp;password=ClaveFalsa123&amp;_token=2904fb7bdddb94e23b2133126.OGssovko7plS7YFzUBnvyKPnJ79CMBpAY-1ABr0aPZ0.Tzh28rR3mdMZgLFCIFHbjsSORfEnCG4QIKU3UfpRDe93WWuQt2zc1T3c6g
+
+13:53:56.443 response time in milliseconds: 174
+3 &lt; 200
+3 &lt; Server: nginx
+3 &lt; Date: Sun, 07 Dec 2025 18:53:56 GMT
+3 &lt; Content-Type: text/html; charset=UTF-8
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Connection: keep-alive
+3 &lt; Cache-Control: no-cache, private
+3 &lt; Vary: Accept-Encoding
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Strict-Transport-Security: max-age=31536000; includeSubdomains;
+3 &lt; Content-Security-Policy: default-src &#39;self&#39; *.projects-abroad.net fonts.googleapis.com fonts.gstatic.com code.jquery.com maxcdn.bootstrapcdn.com ajax.googleapis.com cdnjs.cloudflare.com native.testing.equest.com www.google.com *.docusign.net www.youtube.com youtu.be player.vimeo.com docs.google.com &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; data: font;frame-src &#39;self&#39; www.youtube.com www.vimeo.com vimeo.com www.yahoo.com www.dailymotion.com www.metacafe.com www.ustream.tv native.testing.equest.com sandbox.e-signlive.com *.orangehrmlive.com *.orangehrm.com *.amazonaws.com;connect-src &#39;self&#39; *.orangehrm.com *.orangehrmlive.com;worker-src blob: &#39;self&#39;;img-src * &#39;self&#39; data: blob:
+3 &lt; client_max_body_size: 50M
+3 &lt; Public-Key-Pins: pin-sha256=&quot;Md7QJIL/UMqdHaS73pEkLHm5ofUUE35+r4SYdM014/E=&quot;;pin-sha256=&quot;blgmjf3Tb3C0sUqb7jo4axiZAnr327fX0ycrUGqjw2k=&quot;;pin-sha256=&quot;puCdyuZdXoDc5jSdcGKU6mdjd0VNq16yoaO2BcDF36A=&quot;;pin-sha256=&quot;yQhO6YqQX5Y/NxyHAjXnI3jOtYWUm/TtRr666RunXRg=&quot;; pin-sha256=&quot;Slt48iBVTjuRQJTjbzopminRrHSGtndY0/sj0lFf9Qk=&quot;; max-age=63072000; includeSubDomains
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+  &lt;title&gt;OrangeHRM&lt;/title&gt;
+      &lt;link rel=&quot;icon&quot; href=&quot;/web/dist/favicon.ico?v=1721393199309&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;style&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+    &lt;link href=&quot;/web/dist/js/app.js?v=1721393199309&quot; rel=&quot;preload&quot; as=&quot;script&quot;&gt;
+      &lt;link href=&quot;/web/dist/css/chunk-vendors.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+    &lt;link href=&quot;/web/dist/css/app.css?v=1721393199309&quot; rel=&quot;stylesheet&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;style&gt;
+    :root {
+            --oxd-primary-one-color:#FF7B1D;
+            --oxd-primary-font-color:#FFFFFF;
+            --oxd-secondary-four-color:#76BC21;
+            --oxd-secondary-font-color:#FFFFFF;
+            --oxd-primary-gradient-start-color:#FF920B;
+            --oxd-primary-gradient-end-color:#F35C17;
+            --oxd-secondary-gradient-start-color:#FF920B;
+            --oxd-secondary-gradient-end-color:#F35C17;
+            --oxd-primary-one-lighten-5-color:#ff8a37;
+            --oxd-primary-one-lighten-30-color:#ffd4b6;
+            --oxd-primary-one-darken-5-color:#ff6c03;
+            --oxd-primary-one-alpha-10-color:rgba(255, 123, 29, 0.1);
+            --oxd-primary-one-alpha-15-color:rgba(255, 123, 29, 0.15);
+            --oxd-primary-one-alpha-20-color:rgba(255, 123, 29, 0.2);
+            --oxd-primary-one-alpha-50-color:rgba(255, 123, 29, 0.5);
+            --oxd-secondary-four-lighten-5-color:#84d225;
+            --oxd-secondary-four-darken-5-color:#68a61d;
+            --oxd-secondary-four-alpha-10-color:rgba(118, 188, 33, 0.1);
+            --oxd-secondary-four-alpha-15-color:rgba(118, 188, 33, 0.15);
+            --oxd-secondary-four-alpha-20-color:rgba(118, 188, 33, 0.2);
+            --oxd-secondary-four-alpha-50-color:rgba(118, 188, 33, 0.5);
+        }
+  &lt;/style&gt;
+    &lt;noscript&gt;
+        &lt;strong&gt;
+            We&#39;re sorry but orangehrm doesn&#39;t work properly without JavaScript enabled. Please enable it to continue.
+        &lt;/strong&gt;
+    &lt;/noscript&gt;
+
+    &lt;div id=&quot;app&quot;&gt;
+    &lt;auth-login
+            :error=&quot;{&amp;quot;error&amp;quot;:&amp;quot;invalid_credentials&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;Invalid credentials&amp;quot;}&quot;
+            :token=&quot;&amp;quot;02146a8d762be.TBjaaZO7Vyg-SmpdX6F30iC4SoOUsu0xt6GvafoLr4E.O0uAOd7kIGJ1J1psL-lDlEfRKM3xiplh9OnYPr1An_MDKp1b3f9lZFF7AQ&amp;quot;&quot;
+            :login-logo-src=&quot;&amp;quot;\/web\/images\/ohrm_logo.png&amp;quot;&quot;
+            :login-banner-src=&quot;&amp;quot;\/web\/images\/ohrm_branding.png?v=1721393199309&amp;quot;&quot;
+            :show-social-media=&quot;true&quot;
+            :is-demo-mode=&quot;true&quot;
+            :authenticators=&quot;[]&quot;
+        &gt;
+    &lt;template v-slot:footer&gt;
+        &lt;div class=&quot;orangehrm-copyright-wrapper&quot;&gt;
+            &lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;OrangeHRM OS 5.7&lt;/oxd-text&gt;
+&lt;oxd-text tag=&quot;p&quot; class=&quot;orangehrm-copyright&quot;&gt;&amp;copy; 2005 - 2025 &lt;a href=&quot;http://www.orangehrm.com&quot; target=&quot;_blank&quot;&gt;OrangeHRM, Inc&lt;/a&gt;. All rights reserved.&lt;/oxd-text&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;/auth-login&gt;
+    &lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        window.appGlobal = {
+          baseUrl: &quot;/web/index.php&quot;,
+          publicPath: &quot;/web&quot;,
+        };
+    &lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/chunk-vendors.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/web/dist/js/app.js?v=1721393199309&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment"># 3. Validar error en la respuesta</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.37">
+      <div class="step-ref passed">37</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.38">
+      <div class="step-ref passed">38</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response !contains &#39;Dashboard&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.39">
+      <div class="step-ref passed">39</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains &#39;invalid_credentials&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
