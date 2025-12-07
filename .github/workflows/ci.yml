@@ -11,8 +11,8 @@ jobs:
   # ==================================================================
   # FASE 1: CI (Build) - Compilación y Preparación del Código
   # ==================================================================
-  CI_Build_E2E:
-    name: Build E2E Project
+  CI_Build_Project:
+    name: Build All Projects
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -37,18 +37,32 @@ jobs:
           BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
           BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
 
-      # Compilamos SIN ejecutar tests para validar integridad (CI)
-      - name: Maven Build (Skip Tests)
+      # Compilación E2E
+      - name: Maven Build E2E (Skip Tests)
         run: |
           cd E2E
           mvn clean package -DskipTests
 
-      # Guardamos el directorio E2E preparado (con tokens reemplazados y compilado)
-      - name: Upload Build Artifact
+      # Compilación Apis
+      - name: Maven Build Apis (Skip Tests)
+        run: |
+          cd Apis
+          mvn clean package -DskipTests
+
+      # Guardamos el artefacto E2E
+      - name: Upload Build Artifact E2E
         uses: actions/upload-artifact@v4
         with:
           name: e2e-build-artifact
           path: E2E/
+          retention-days: 1
+
+      # Guardamos el artefacto Apis
+      - name: Upload Build Artifact Apis
+        uses: actions/upload-artifact@v4
+        with:
+          name: apis-build-artifact
+          path: Apis/
           retention-days: 1
 
   # ==================================================================
@@ -56,7 +70,7 @@ jobs:
   # ==================================================================
   CD_Execute_E2E:
     name: Execute UI Tests & Report
-    needs: CI_Build_E2E # Dependencia estricta: No corre si el Build falla
+    needs: CI_Build_Project # Dependencia estricta: No corre si el Build falla
     runs-on: ubuntu-latest
     if: always() # Intenta correr aunque el CI tenga advertencias, pero 'needs' manda
     permissions:
@@ -93,39 +107,14 @@ jobs:
           path: E2E/target/site/serenity
           if-no-files-found: warn
 
-  # ==================================================================
-  # FASE 3: CI (Build) - Apis
-  # ==================================================================
-  CI_Build_Apis:
-    name: Build Apis Project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Maven Build (Skip Tests)
-        run: |
-          cd Apis
-          mvn clean package -DskipTests
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: apis-build-artifact
-          path: Apis/
-          retention-days: 1
 
   # ==================================================================
   # FASE 4: CD (Test & Report) - Apis
   # ==================================================================
   CD_Execute_Apis:
     name: Execute API Tests & Report
-    needs: CI_Build_Apis
+    needs: CI_Build_Project
     runs-on: ubuntu-latest
     if: always()
     permissions:
