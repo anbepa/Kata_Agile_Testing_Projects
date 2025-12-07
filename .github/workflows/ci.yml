@@ -69,8 +69,8 @@ jobs:
   # FASE 2: CD (Test & Report) - Ejecución y Entrega de Resultados
   # ==================================================================
   CD_Execute_E2E:
-    name: Execute UI Tests & Report
-    needs: CI_Build_Project # Dependencia estricta: No corre si el Build falla
+    name: Execute UI Tests and Report
+    needs: CI_Build_Project
     runs-on: ubuntu-latest
     if: always() # Intenta correr aunque el CI tenga advertencias, pero 'needs' manda
     permissions:
@@ -97,7 +97,7 @@ jobs:
           BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
         run: |
           cd E2E
-          mvn clean verify serenity:aggregate || true
+          mvn verify serenity:aggregate -Dserenity.outputDirectory=target/site/serenity || true
 
       # Almacenamiento del Reporte como Artefacto
       - name: Upload Serenity Report
@@ -136,7 +136,7 @@ jobs:
       - name: Run API Tests and Generate Report
         run: |
           cd Apis
-          mvn clean test || true
+          mvn test || true
 
       - name: Upload Karate Report
         uses: actions/upload-artifact@v4
@@ -188,14 +188,14 @@ jobs:
             }
             END {
               if (total > 0) {
-                print "### ⏱️ Performance Quick Look";
+                print "### Performance Quick Look";
                 print "| Metric | Value |";
                 print "|--------|-------|";
                 print "| **Total Requests** | " total " |";
                 printf "| **Avg Response Time** | %.2f ms |\n", time/total;
                 printf "| **Error Rate** | %.2f%% |\n", (fail/total)*100;
               } else {
-                print "### ⚠️ No Performance Data Recorded";
+                print "### No Performance Data Recorded";
               }
             }
           ' result.jtl > performance_summary.md
@@ -214,7 +214,7 @@ jobs:
           if-no-files-found: warn
 
   # ==================================================================
-  # FASE 6: Publicación Unificada de Reportes
+  # FASE 6: Publicacion Unificada de Reportes
   # ==================================================================
   Deploy_Reports:
     name: Deploy Combined Reports
@@ -229,7 +229,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: e2e-report
-          path: public
+          path: public/serenity-report
 
       - name: Download API Report
         uses: actions/download-artifact@v4
@@ -259,16 +259,16 @@ jobs:
 
       - name: Generate Report Summary
         run: |
-          echo "### 📊 Test Reports Ready!" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Reports Ready!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Report Type | Link |" >> $GITHUB_STEP_SUMMARY
           echo "|-------------|------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 🟢 **E2E (Serenity)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/index.html) |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔵 **API (Karate)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/karate-reports/karate-summary.html) |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🟠 **Performance (JMeter)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/performance-report/index.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **E2E (Serenity)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/serenity-report/index.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **API (Karate)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/karate-reports/karate-summary.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Performance (JMeter)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/performance-report/index.html) |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           if [ -f performance_summary.md ]; then
             cat performance_summary.md >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "> ⚠️ **Note:** It may take a minute for GitHub Pages to update after the workflow completes." >> $GITHUB_STEP_SUMMARY
+          echo "> Note: It may take a minute for GitHub Pages to update after the workflow completes." >> $GITHUB_STEP_SUMMARY
