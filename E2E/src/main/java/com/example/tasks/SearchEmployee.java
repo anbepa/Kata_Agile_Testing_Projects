@@ -10,9 +10,7 @@ import com.example.userinterfaces.MainMenu;
 import com.example.userinterfaces.DirectoryPage;
 
 /**
- * Navigates to the Directory module and searches for an employee by name. The
- * task opens the Directory from the main menu, enters the supplied search
- * query into the employee name filter and clicks the search button.
+ * Tarea para buscar un empleado en el Directorio
  */
 @Subject("search for an employee in the directory")
 public class SearchEmployee implements Task {
@@ -36,7 +34,7 @@ public class SearchEmployee implements Task {
                 Click.on(MainMenu.DIRECTORY_MENU),
                 Enter.theValue(searchTerm).into(DirectoryPage.EMPLOYEE_NAME_INPUT),
 
-                // Pause to allow autocomplete to initialize (user request: "slow down")
+                // Espera para que se inicialice el autocompletado
                 net.serenitybdd.screenplay.Task.where("{0} waits for autocomplete cooldown",
                         actor1 -> {
                             try {
@@ -45,14 +43,14 @@ public class SearchEmployee implements Task {
                             }
                         }),
 
-                // Wait for dropdown
+                // Esperar a que aparezca el dropdown
                 net.serenitybdd.screenplay.waits.WaitUntil.the(
                         net.serenitybdd.screenplay.targets.Target.the("dropdown")
                                 .located(org.openqa.selenium.By.cssSelector(".oxd-autocomplete-dropdown")),
                         net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible()).forNoMoreThan(10)
                         .seconds(),
 
-                // Wait for first option to be visible to ensure results are loaded
+                // Esperar a que la primera opción sea visible
                 net.serenitybdd.screenplay.waits.WaitUntil.the(
                         net.serenitybdd.screenplay.targets.Target.the("first autocomplete option")
                                 .locatedBy(
@@ -60,12 +58,10 @@ public class SearchEmployee implements Task {
                         net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible()).forNoMoreThan(10)
                         .seconds(),
 
-                // Click FIRST option in the list
+                // Hacer clic en la primera opción de la lista
                 Click.on(net.serenitybdd.screenplay.targets.Target.the("first autocomplete option")
                         .locatedBy("//div[@role='listbox']//div[contains(@class,'oxd-autocomplete-option')][1]")),
 
                 Click.on(DirectoryPage.SEARCH_BUTTON));
     }
-
-    // Builder removed as no longer needed
 }

@@ -9,9 +9,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import com.example.userinterfaces.LoginPage;
 
 /**
- * Screenplay task that logs into the OrangeHRM application using the
- * administrator credentials. The credentials are passed in as arguments
- * rather than being hardcoded to encourage reuse and configurability.
+ * Tarea para iniciar sesión en OrangeHRM
  */
 @Subject("log in as an administrator")
 public class Login implements Task {
