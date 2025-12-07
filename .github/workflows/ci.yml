@@ -85,6 +85,26 @@ jobs:
           cd E2E
           mvn verify || true
 
+      # Verificar que el reporte se generó correctamente
+      - name: Verify Serenity Report
+        run: |
+          echo "Verificando estructura del reporte Serenity..."
+          if [ -d "E2E/target/site/serenity" ]; then
+            echo "Directorio del reporte encontrado"
+            ls -la E2E/target/site/serenity/
+            if [ -f "E2E/target/site/serenity/index.html" ]; then
+              echo "index.html encontrado"
+            else
+              echo "ERROR: index.html NO encontrado"
+              echo "Contenido del directorio:"
+              find E2E/target/site/serenity -type f -name "*.html" | head -10
+            fi
+          else
+            echo "ERROR: Directorio del reporte NO existe"
+            echo "Estructura de target/site:"
+            ls -la E2E/target/site/ || echo "target/site no existe"
+          fi
+
       # Generación y Almacenamiento del Reporte como Artefacto
       - name: Upload Serenity Report
         uses: actions/upload-artifact@v4
@@ -100,4 +120,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./E2E/target/site/serenity
-          keep_files: true
+          keep_files: false
+          force_orphan: true
