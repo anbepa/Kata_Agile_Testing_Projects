@@ -1,4 +1,4 @@
-# 🚀 Kata Agile Testing Projects
+#  Kata Agile Testing Projects
 
 Este repositorio contiene la solución automatizada para el reto de QA, integrando pruebas **E2E (Web)**, **API** y **Performance** en un flujo CI/CD robusto.
 
