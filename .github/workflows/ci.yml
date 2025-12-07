@@ -177,6 +177,35 @@ jobs:
             -JRampAuthorization=${{ vars.JMETER_RAMPUP || 1 }} \
             -JDurationAuthorization=${{ vars.JMETER_DURATION || 10 }}
 
+      - name: Generate JMeter Summary Metrics
+        run: |
+          awk -F',' '
+            BEGIN { total=0; fail=0; time=0; }
+            NR>1 {
+              total++;
+              time+=$2;
+              if ($8 == "false") fail++;
+            }
+            END {
+              if (total > 0) {
+                print "### ⏱️ Performance Quick Look";
+                print "| Metric | Value |";
+                print "|--------|-------|";
+                print "| **Total Requests** | " total " |";
+                printf "| **Avg Response Time** | %.2f ms |\n", time/total;
+                printf "| **Error Rate** | %.2f%% |\n", (fail/total)*100;
+              } else {
+                print "### ⚠️ No Performance Data Recorded";
+              }
+            }
+          ' result.jtl > performance_summary.md
+
+      - name: Upload Performance Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-summary
+          path: performance_summary.md
+
       - name: Upload Performance Report
         uses: actions/upload-artifact@v4
         with:
@@ -214,6 +243,12 @@ jobs:
           name: performance-report
           path: public/performance-report
 
+      - name: Download Performance Summary
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-summary
+          path: .
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -231,5 +266,9 @@ jobs:
           echo "| 🟢 **E2E (Serenity)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/index.html) |" >> $GITHUB_STEP_SUMMARY
           echo "| 🔵 **API (Karate)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/karate-reports/karate-summary.html) |" >> $GITHUB_STEP_SUMMARY
           echo "| 🟠 **Performance (JMeter)** | [View Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/performance-report/index.html) |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f performance_summary.md ]; then
+            cat performance_summary.md >> $GITHUB_STEP_SUMMARY
+          fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "> ⚠️ **Note:** It may take a minute for GitHub Pages to update after the workflow completes." >> $GITHUB_STEP_SUMMARY
