@@ -1,7 +1,0 @@
-/*
- * A tiny 1x1 white PNG used as a placeholder profile picture during
- * automated tests.  Although saved with a .jpg extension for convenience,
- * it is valid image data that will satisfy the upload control in
- * OrangeHRM.  The base64 encoded contents below represent a 1x1 PNG.
- */
-iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=
